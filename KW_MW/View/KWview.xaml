@@ -1,0 +1,50 @@
+﻿<Window x:Class="KW_MW.View.KWview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KW_MW.View"
+        mc:Ignorable="d"
+        Title="KW - inż. Marek Wojciechowicz" Height="450" Width="800" Icon="../Img/KWMW.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="340"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Plik">
+                <MenuItem Header="Otwórz" Click="MenuItem_Click_OpneFile" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <DockPanel Grid.Row="1">
+            <StackPanel>
+                <ComboBox IsEnabled="{Binding ElementName=radioGenerateKW, Path=IsChecked}" Grid.Row="1" SelectedIndex="0" x:Name="comboBoxCourt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250"/>
+                <CheckBox IsChecked="True" IsEnabled="{Binding ElementName=radioGenerateKW, Path=IsChecked}" x:Name="checkBoxSpr" Padding="10,5"  Margin="5 0" VerticalContentAlignment="Center">
+                    <StackPanel>
+                        <Label Margin="0" Padding="0">Sprawdzaj czy KW są z wybranego sądu</Label>
+                    </StackPanel>
+                </CheckBox>
+                <GroupBox Header="Rodzaj zadania">
+                    <StackPanel >
+                        <RadioButton x:Name="radioGenerateKW" Checked="RadioGenerateKW_Checked" >Generuj KW ze starego numeru</RadioButton>
+                        <RadioButton x:Name="radioCheckKW" Checked="RadioCheckKW_Checked" >Sprawdź cyfrę kontrolną</RadioButton>
+                    </StackPanel>
+
+                </GroupBox>
+
+                <Button x:Name="generateKwNumber" Grid.Row="1" Height="35" Width="100" VerticalAlignment="Top" Click="GenerateKwNumber_Click">
+                    <Label>Generuj</Label>
+                </Button>
+                <Button x:Name="checkKwNumber" Visibility="Collapsed" Grid.Row="1" Height="35" Width="100" VerticalAlignment="Top" Click="CheckKwNumber_Click" >
+                    <Label>Sprawdź</Label>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+        <DataGrid x:Name="dataGridFromFile" Grid.Column="1" Grid.Row="1"></DataGrid>
+    </Grid>
+</Window>
