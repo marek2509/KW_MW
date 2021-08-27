@@ -12,7 +12,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="340"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -23,14 +23,14 @@
         </Menu>
         <DockPanel Grid.Row="1">
             <StackPanel>
-                <ComboBox IsEnabled="{Binding ElementName=radioGenerateKW, Path=IsChecked}" Grid.Row="1" SelectedIndex="0" x:Name="comboBoxCourt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250"/>
-                <CheckBox IsChecked="True" IsEnabled="{Binding ElementName=radioGenerateKW, Path=IsChecked}" x:Name="checkBoxSpr" Padding="10,5"  Margin="5 0" VerticalContentAlignment="Center">
+                <ComboBox IsEnabled="{Binding ElementName=checkBoxSpr, Path=IsChecked}" Grid.Row="1" x:Name="comboBoxCourt" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="ComboBoxCourt_SelectionChanged" />
+                <CheckBox IsChecked="True" IsEnabled="{Binding ElementName=radioCheckKW, Path=IsChecked}" x:Name="checkBoxSpr" Padding="10,5"  Margin="5 0" HorizontalAlignment="Center" VerticalContentAlignment="Center">
                     <StackPanel>
                         <Label Margin="0" Padding="0">Sprawdzaj czy KW są z wybranego sądu</Label>
                     </StackPanel>
                 </CheckBox>
-                <GroupBox Header="Rodzaj zadania">
-                    <StackPanel >
+                <GroupBox Header="Rodzaj zadania" HorizontalAlignment="Center" Width="250">
+                    <StackPanel>
                         <RadioButton x:Name="radioGenerateKW" Checked="RadioGenerateKW_Checked" >Generuj KW ze starego numeru</RadioButton>
                         <RadioButton x:Name="radioCheckKW" Checked="RadioCheckKW_Checked" >Sprawdź cyfrę kontrolną</RadioButton>
                     </StackPanel>
@@ -45,6 +45,14 @@
                 </Button>
             </StackPanel>
         </DockPanel>
-        <DataGrid x:Name="dataGridFromFile" Grid.Column="1" Grid.Row="1"></DataGrid>
+        <Image Grid.Column="1" Grid.Row="1" Source="../img/KWMW.png" Height="250" />
+        <DataGrid x:Name="dataGridFromFile" Grid.Column="1" Grid.Row="1" Opacity="0.95">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+     
     </Grid>
 </Window>

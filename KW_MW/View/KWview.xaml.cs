@@ -26,12 +26,13 @@ namespace KW_MW.View
             comboBoxCourt.ItemsSource = Infrastructure.CourtList.ListCourtToComboBox();
             radioGenerateKW.IsChecked = true;
             dataGridFromFile.ItemsSource = KWFromFile;
-
+            Console.WriteLine(Properties.Settings.Default.selectedIdxCourtList);
+            comboBoxCourt.SelectedIndex = Properties.Settings.Default.selectedIdxCourtList;
         }
 
         private void MenuItem_Click_OpneFile(object sender, RoutedEventArgs e)
         {
-            KWFromFile = Infrastructure.File.odczytajParametry();
+            KWFromFile = Infrastructure.FileOperation.readTheParametrs();
             dataGridFromFile.ItemsSource = KWFromFile;
         }
 
@@ -45,9 +46,6 @@ namespace KW_MW.View
               kw.Result =  Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.FillOldNumber(kw.KW, selectedValueComboCourt);
               Console.WriteLine(kw.Result);
             }
-
-
-            //dataGridFromFile.ItemsSource = KWFromFile;
             dataGridFromFile.Items.Refresh();
         }
 
@@ -58,12 +56,9 @@ namespace KW_MW.View
 
             foreach (var kw in KWFromFile)
             {
-                kw.Result = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW);
+                kw.Result = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW, selectedValueComboCourt);
                 Console.WriteLine(kw.Result);
             }
-
-
-            //dataGridFromFile.ItemsSource = KWFromFile;
             dataGridFromFile.Items.Refresh();
         }
 
@@ -79,6 +74,16 @@ namespace KW_MW.View
         {
                checkKwNumber.Visibility = Visibility.Collapsed;
                generateKwNumber.Visibility = Visibility.Visible;
+               checkBoxSpr.IsChecked = true;
         }
+
+        private void ComboBoxCourt_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Properties.Settings.Default.selectedIdxCourtList = comboBoxCourt.SelectedIndex;
+            Properties.Settings.Default.Save();
+            Console.WriteLine(Properties.Settings.Default.selectedIdxCourtList);
+            Console.WriteLine(comboBoxCourt.SelectedIndex);
+        }
+
     }
 }

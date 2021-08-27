@@ -34,5 +34,17 @@ namespace KW_MW.Properties {
                 this["FilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int selectedIdxCourtList {
+            get {
+                return ((int)(this["selectedIdxCourtList"]));
+            }
+            set {
+                this["selectedIdxCourtList"] = value;
+            }
+        }
     }
 }
