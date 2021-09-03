@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace KW_MW.View
 {
@@ -32,7 +24,7 @@ namespace KW_MW.View
 
         private void MenuItem_Click_OpneFile(object sender, RoutedEventArgs e)
         {
-            KWFromFile = Infrastructure.FileOperation.readTheParametrs();
+            KWFromFile = Infrastructure.FileOperation.ReadTheParametrs();
             dataGridFromFile.ItemsSource = KWFromFile;
         }
 
@@ -85,5 +77,12 @@ namespace KW_MW.View
             Console.WriteLine(comboBoxCourt.SelectedIndex);
         }
 
+        private void MenuItem_Click_SaveToFile(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[KW]\t[OtherInfo]\t[Result]");
+            KWFromFile.ForEach(x => sb.AppendLine(x.KW + "\t" + x.OtherInfo + "\t" + x.Result));
+            Infrastructure.FileOperation.SaveToFile(sb.ToString());
+        }
     }
 }

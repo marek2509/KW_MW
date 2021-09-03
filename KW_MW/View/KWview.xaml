@@ -18,7 +18,8 @@
 
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Plik">
-                <MenuItem Header="Otwórz" Click="MenuItem_Click_OpneFile" ></MenuItem>
+                <MenuItem Header="Otwórz" Click="MenuItem_Click_OpneFile"></MenuItem>
+                <MenuItem Header="Zapisz"  Click="MenuItem_Click_SaveToFile"></MenuItem>
             </MenuItem>
         </Menu>
         <DockPanel Grid.Row="1">

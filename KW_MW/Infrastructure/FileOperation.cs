@@ -11,7 +11,6 @@ namespace KW_MW.Infrastructure
 {
     public static class FileOperation
     {
-
         public static string GetPath()
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -27,7 +26,7 @@ namespace KW_MW.Infrastructure
             {
                 try
                 {
-                    setProperties(dlg.FileName);
+                    SetProperties(dlg.FileName);
                 }
                 catch (Exception esa)
                 {
@@ -42,13 +41,13 @@ namespace KW_MW.Infrastructure
             return dlg.FileName;
         }
 
-        public static void setProperties(string FileName)
+        public static void SetProperties(string FileName)
         {
             Properties.Settings.Default.FilePath = FileName;
             Properties.Settings.Default.Save();
         }
 
-        public static List<string> operFile()
+        public static List<string> OperFile()
         {
             List<string> allTheTextReadFromLine = new List<string>();
             OpenFileDialog dlg = new OpenFileDialog();
@@ -57,16 +56,16 @@ namespace KW_MW.Infrastructure
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                allTheTextReadFromLine = readFromFileTextLine(dlg.FileName).ToList();
+                allTheTextReadFromLine = ReadFromFileTextLine(dlg.FileName).ToList();
             }
             return allTheTextReadFromLine;
         }
 
-        public static List<KWModel> readTheParametrs()
+        public static List<KWModel> ReadTheParametrs()
         {
             List<KWModel> modelKW = new List<KWModel>();
             List<string> listParam = new List<string>();
-            var item = operFile();
+            var item = OperFile();
             try
             {
                 for (int i = 0; i < item.Count; i++)
@@ -87,7 +86,7 @@ namespace KW_MW.Infrastructure
             return modelKW;
         }
 
-        private static string[] readFromFileTextLine(string a) //odczyt z pliku z wyjatkami niepowodzenia należy podać ścieżkę, zwraca tablicę odczytaną z pliku
+        private static string[] ReadFromFileTextLine(string a) //odczyt z pliku z wyjatkami niepowodzenia należy podać ścieżkę, zwraca tablicę odczytaną z pliku
         {
             string[] all = null;
             //string[] lines = null;
@@ -103,7 +102,7 @@ namespace KW_MW.Infrastructure
             return all;
         }
 
-        public static void saveToFile()
+        public static void SaveToFile(string saveText)
         {
             SaveFileDialog svd = new SaveFileDialog();
             svd.DefaultExt = ".txt";
@@ -114,7 +113,7 @@ namespace KW_MW.Infrastructure
                 using (StreamWriter sw = new StreamWriter(s, Encoding.Default))
                     try
                     {
-                        sw.Write("");
+                        sw.Write(saveText);
                         sw.Close();
 
                     }
