@@ -48,7 +48,7 @@ namespace KW_MW.View
 
             foreach (var kw in KWFromFile)
             {
-                kw.Result = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW, selectedValueComboCourt);
+                kw.Result = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW, selectedValueComboCourt, (bool)checkBoxSpr.IsChecked);
                 Console.WriteLine(kw.Result);
             }
             dataGridFromFile.Items.Refresh();

@@ -53,7 +53,7 @@ namespace KW_MW.Infrastructure
                 return sb.ToString();
             }
 
-            public static string CheckKWNumber(string KWNumber, string courtNumber=null)
+            public static string CheckKWNumber(string KWNumber, string courtNumber=null, bool isCheckCourtNumber = false)
             {
                 List<char> charKWNumer = new List<char>();
                 charKWNumer = KWNumber.ToCharArray().ToList();
@@ -68,10 +68,12 @@ namespace KW_MW.Infrastructure
                     return "Błędny numer SĄDU";
                 }
 
-                if (courtNumber != KWNumber.Substring(0, 4))
+
+                if (isCheckCourtNumber && courtNumber != KWNumber.Substring(0, 4))
                 {
                     return "Numer SĄDU inny niż wybrany";
                 }
+
 
                 if (charKWNumer[4] != '/' || charKWNumer[13] != '/')
                 {
