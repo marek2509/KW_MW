@@ -36,7 +36,6 @@ namespace KW_MW.View
             foreach (var kw in KWFromFile)
             {
               kw.Result =  Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.FillOldNumber(kw.KW, selectedValueComboCourt);
-              Console.WriteLine(kw.Result);
             }
             dataGridFromFile.Items.Refresh();
         }
@@ -48,8 +47,7 @@ namespace KW_MW.View
 
             foreach (var kw in KWFromFile)
             {
-                kw.Result = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW, selectedValueComboCourt, (bool)checkBoxSpr.IsChecked);
-                Console.WriteLine(kw.Result);
+                kw.OtherInfo = Infrastructure.AnalysisKWNumbers.BadanieKsiagWieczystych.CheckKWNumber(kw.KW, selectedValueComboCourt, (bool)checkBoxSpr.IsChecked);
             }
             dataGridFromFile.Items.Refresh();
         }

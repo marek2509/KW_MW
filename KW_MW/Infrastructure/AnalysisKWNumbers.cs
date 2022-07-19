@@ -19,7 +19,9 @@ namespace KW_MW.Infrastructure
                 charCourtNumber = courtNumber.ToCharArray().ToList();
 
                 List<char> charKWNumber = new List<char>();
-                charKWNumber = inputKWNum.Trim().ToUpper().ToCharArray().ToList();
+
+                charKWNumber = inputKWNum?.Trim().ToUpper().ToCharArray().ToList();
+                if (charKWNumber == null) return null;
 
                 if (charKWNumber.Count > 8)
                 {
@@ -56,7 +58,8 @@ namespace KW_MW.Infrastructure
             public static string CheckKWNumber(string KWNumber, string courtNumber=null, bool isCheckCourtNumber = false)
             {
                 List<char> charKWNumer = new List<char>();
-                charKWNumer = KWNumber.ToCharArray().ToList();
+                charKWNumer = KWNumber?.ToCharArray().ToList();
+                if (charKWNumer == null) return null;
 
                 if (!(charKWNumer.Count == 15))
                 {
@@ -68,56 +71,24 @@ namespace KW_MW.Infrastructure
                     return "Błędny numer SĄDU";
                 }
 
-
                 if (isCheckCourtNumber && courtNumber != KWNumber.Substring(0, 4))
                 {
                     return "Numer SĄDU inny niż wybrany";
                 }
 
-
                 if (charKWNumer[4] != '/' || charKWNumer[13] != '/')
                 {
-                    return "Brak znaków '/' w odpowiednim miejscu";
+                    return "Brak znaku '/' w odpowiednim miejscu";
                 }
 
-                if ( !numeric.Exists(x => x == charKWNumer[5]))
+                for (int i = 5; i <= 12; i++)
                 {
-                    return charKWNumer[5] + " <- To nie jest cyfra!";
-                }
+                    var cyfraZSrodkaNumeruKw = charKWNumer[i];
 
-                if (!numeric.Exists(x => x == charKWNumer[6]))
-                {
-                    return charKWNumer[6] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[7]))
-                {
-                    return charKWNumer[7] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[8]))
-                {
-                    return charKWNumer[8] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[9]))
-                {
-                    return charKWNumer[9] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[10]))
-                {
-                    return charKWNumer[10] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[11]))
-                {
-                    return charKWNumer[11] + " <- To nie jest cyfra!";
-                }
-
-                if (!numeric.Exists(x => x == charKWNumer[12]))
-                {
-                    return charKWNumer[12] + " <- To nie jest cyfra!";
+                    if (!numeric.Exists(x => x == cyfraZSrodkaNumeruKw))
+                    {
+                        return cyfraZSrodkaNumeruKw + " <- To nie jest cyfra!";
+                    }
                 }
 
                 if (!numeric.Exists(x => x == charKWNumer[14]))
@@ -125,11 +96,13 @@ namespace KW_MW.Infrastructure
                     return charKWNumer[14] + " <- To nie jest cyfra!";
                 }
 
-                if (!numberDecodingCharArr.Exists(x => x == charKWNumer[0]) || !numberDecodingCharArr.Exists(y => y == charKWNumer[1]) ||
-                    !numberDecodingCharArr.Exists(z => z == charKWNumer[2]) || !numberDecodingCharArr.Exists(v => v == charKWNumer[3]))
-                {
-                    return "Błędny numer SĄDU";
-                }
+
+                //if (!numberDecodingCharArr.Exists(x => x == charKWNumer[0]) || !numberDecodingCharArr.Exists(y => y == charKWNumer[1]) ||
+                //    !numberDecodingCharArr.Exists(z => z == charKWNumer[2]) || !numberDecodingCharArr.Exists(v => v == charKWNumer[3]))
+                //{
+                //    return "Błędny numer SĄDU";
+                //}
+
 
 
                 List<char> charCourtNumber = new List<char>();
